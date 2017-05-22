@@ -1,0 +1,22 @@
+sudo: false
+language: python
+virtualenv:
+  system_site_packages: true
+services:
+env:
+  matrix:
+    - DISTRIB="conda" PYTHON_VERSION="3.4" COVERAGE="true"
+    - DISTRIB="conda" PYTHON_VERSION="3.5" COVERAGE="false"
+addons:
+  apt:
+    packages:
+      - git
+      - python-pip
+install:
+before_script:
+script:
+  - python setup.py test
+after_success:
+  - if [[ "$COVERAGE" == "true" ]]; then coveralls || echo "failed"; fi
+cache:
+  - apt
