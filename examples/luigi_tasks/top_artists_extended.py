@@ -51,9 +51,11 @@ class AggregateArtistsS3(luigi.Task):
         :return: the target output for this task.
         :rtype: object (:py:class:`luigi.target.Target`)
         """
-        return luigi_s3.S3Target("s3://{0}{1}".format(
+        s3_string="s3://{0}{1}".format(
             os.environ["LUIGIS3_EXAMPLES"],
-            "artist_streams_{}.tsv".format(self.date_interval)))
+            "artist_streams_{}.tsv".format(self.date_interval))
+        print(s3_string)
+        return luigi_s3.S3Target(s3_string)
 
     def requires(self):
         """
