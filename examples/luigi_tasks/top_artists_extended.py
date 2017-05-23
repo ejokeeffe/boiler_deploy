@@ -72,7 +72,7 @@ class AggregateArtistsS3(luigi.Task):
         artist_count = defaultdict(int)
 
         for t in self.input():
-            sleep(self.sleep_seconds)
+            sleep(int(self.sleep_seconds))
             with t.open('r') as in_file:
                 for line in in_file:
                     _, artist, track = line.strip().split()
