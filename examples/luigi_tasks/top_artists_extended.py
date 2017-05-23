@@ -5,6 +5,7 @@ from luigi import six
 
 import luigi
 import luigi.contrib.s3 as luigi_s3
+import boto
 
 class StreamsS3(luigi.Task):
     """
@@ -30,9 +31,9 @@ class StreamsS3(luigi.Task):
         :return: the target output for this task.
         :rtype: object (:py:class:`luigi.target.Target`)
         """
-        return luigi_s3.S3Target("s3://{0}/{1}".format(
+        return luigi_s3.S3Target("s3://{0}{1}".format(
             os.environ["LUIGIS3_EXAMPLES"],
-            self.date.strftime('data/streams_%Y_%m_%d_faked.tsv')))
+            self.date.strftime('streams_%Y_%m_%d_faked.tsv')))
 
 
 class AggregateArtistsS3(luigi.Task):
@@ -50,9 +51,9 @@ class AggregateArtistsS3(luigi.Task):
         :return: the target output for this task.
         :rtype: object (:py:class:`luigi.target.Target`)
         """
-        return luigi_s3.S3Target("s3://{0}/{1}".format(
+        return luigi_s3.S3Target("s3://{0}{1}".format(
             os.environ["LUIGIS3_EXAMPLES"],
-            "data/artist_streams_{}.tsv".format(self.date_interval)))
+            "artist_streams_{}.tsv".format(self.date_interval)))
 
     def requires(self):
         """
