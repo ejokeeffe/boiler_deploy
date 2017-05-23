@@ -20,6 +20,7 @@ class StreamsS3(luigi.Task):
         """
         Generates bogus data and writes it into the :py:meth:`~.Streams.output` target.
         """
+        sleep(int(self.sleep_seconds))
         with self.output().open('w') as output:
             for _ in range(1000):
                 output.write('{} {} {}\n'.format(
@@ -34,7 +35,6 @@ class StreamsS3(luigi.Task):
         :return: the target output for this task.
         :rtype: object (:py:class:`luigi.target.Target`)
         """
-        sleep(int(self.sleep_seconds))
         return luigi_s3.S3Target("s3:{0}{1}".format(
             os.environ["LUIGIS3_EXAMPLES"],
             self.date.strftime('streams_%Y_%m_%d_faked.tsv')))
