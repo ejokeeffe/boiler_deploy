@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # install luigi and dependencies
+# before running ensure your environment is activated
 pip install luigi
 pip install sqlalchemy
 
