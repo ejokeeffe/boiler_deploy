@@ -14,6 +14,7 @@ class StreamsS3(luigi.Task):
     Faked version right now, just generates bogus data.
     """
     date = luigi.DateParameter()
+    sleep_seconds = luigi.Parameter()
 
     def run(self):
         """
@@ -33,6 +34,7 @@ class StreamsS3(luigi.Task):
         :return: the target output for this task.
         :rtype: object (:py:class:`luigi.target.Target`)
         """
+        sleep(int(self.sleep_seconds))
         return luigi_s3.S3Target("s3:{0}{1}".format(
             os.environ["LUIGIS3_EXAMPLES"],
             self.date.strftime('streams_%Y_%m_%d_faked.tsv')))
@@ -66,13 +68,12 @@ class AggregateArtistsS3(luigi.Task):
         * :py:class:`~.Streams`
         :return: list of object (:py:class:`luigi.task.Task`)
         """
-        return [StreamsS3(date) for date in self.date_interval]
+        return [StreamsS3(date,self.sleep_seconds) for date in self.date_interval]
 
     def run(self):
         artist_count = defaultdict(int)
 
         for t in self.input():
-            sleep(int(self.sleep_seconds))
             with t.open('r') as in_file:
                 for line in in_file:
                     _, artist, track = line.strip().split()
