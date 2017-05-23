@@ -31,7 +31,7 @@ class StreamsS3(luigi.Task):
         :rtype: object (:py:class:`luigi.target.Target`)
         """
         return luigi_s3.S3Target("s3://{0}/{1}".format(
-            os.environ("LUIGIS3_EXAMPLES"),
+            os.environ["LUIGIS3_EXAMPLES"],
             self.date.strftime('data/streams_%Y_%m_%d_faked.tsv')))
 
 
@@ -51,7 +51,7 @@ class AggregateArtistsS3(luigi.Task):
         :rtype: object (:py:class:`luigi.target.Target`)
         """
         return luigi_s3.S3Target("s3://{0}/{1}".format(
-            os.environ("LUIGIS3_EXAMPLES"),
+            os.environ["LUIGIS3_EXAMPLES"],
             "data/artist_streams_{}.tsv".format(self.date_interval)))
 
     def requires(self):
