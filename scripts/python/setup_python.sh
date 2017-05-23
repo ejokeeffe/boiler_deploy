@@ -47,5 +47,8 @@ git clone https://github.com/ejokeeffe/boiler_deploy.git
 cd boiler_deploy/scripts/luigi
 sudo chmod a+rwx setup_luigi.sh
 bash setup_luigi.sh
+cd ~/repos/boiler_deploy/examples/luigi_tasks
+sudo chmod a+rwx setup_examples.sh
+bash setup_examples.sh
 
 EOF

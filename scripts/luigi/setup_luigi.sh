@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# install luigi
+# install luigi and dependencies
 pip install luigi
+pip install sqlalchemy
 
 # add environment variables
 cd ~
@@ -13,3 +14,6 @@ cp ~/repos/boiler_deploy/scripts/luigi/luigi.cfg ~/luigi.cfg
 
 # add the environment variable for the location of this file
 echo export\ LUIGI_CONFIG_PATH="/home/ec2-user/luigi.cfg" >> .bashrc
+
+# set up folder to store history
+mkdir ~/luigi_logger
