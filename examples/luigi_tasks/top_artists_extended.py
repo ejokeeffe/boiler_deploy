@@ -7,6 +7,8 @@ import luigi
 import luigi.contrib.s3 as luigi_s3
 import boto
 
+from time import sleep
+
 class StreamsS3(luigi.Task):
     """
     Faked version right now, just generates bogus data.
@@ -43,6 +45,7 @@ class AggregateArtistsS3(luigi.Task):
     """
 
     date_interval = luigi.DateIntervalParameter()
+    sleep_seconds = luigi.Parameter()
 
     def output(self):
         """
@@ -69,6 +72,7 @@ class AggregateArtistsS3(luigi.Task):
         artist_count = defaultdict(int)
 
         for t in self.input():
+            sleep(self.sleep_seconds)
             with t.open('r') as in_file:
                 for line in in_file:
                     _, artist, track = line.strip().split()
