@@ -26,11 +26,11 @@ class StreamsS3(luigi.Task):
     def output(self):
         """
         Returns the target output for this task.
-        In this case, a successful execution of this task will create a file in the local file system.
+        In this case, a successful execution of this task will create a file in the s3 file system.
         :return: the target output for this task.
         :rtype: object (:py:class:`luigi.target.Target`)
         """
-        return luigi_s3.S3Target("{0}/{1}".format(
+        return luigi_s3.S3Target("s3://{0}/{1}".format(
             os.environ("LUIGIS3_EXAMPLES"),
             self.date.strftime('data/streams_%Y_%m_%d_faked.tsv')))
 
@@ -50,7 +50,7 @@ class AggregateArtistsS3(luigi.Task):
         :return: the target output for this task.
         :rtype: object (:py:class:`luigi.target.Target`)
         """
-        return luigi_s3.S3Target("{0}/{1}".format(
+        return luigi_s3.S3Target("s3://{0}/{1}".format(
             os.environ("LUIGIS3_EXAMPLES"),
             "data/artist_streams_{}.tsv".format(self.date_interval)))
 
