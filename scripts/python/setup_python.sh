@@ -29,6 +29,13 @@ rm miniconda.sh
 conda create -n newenviron --yes python=3.5 pip scipy pandas numpy psycopg2 sphinx pylint
 source activate newenviron
 
+# add to bashrc
+cd ~
+# backup of bashrc
+cp .bashrc .bashrc.bkup
+echo export\ PATH="/home/ec2-user/miniconda/bin:\$PATH" >> .bashrc
+
+
 # pull down whatever files you wish to run - add code here 
 # the following is shown as an example where we
 # wish to run luigi scripts
