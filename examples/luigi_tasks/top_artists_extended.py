@@ -9,6 +9,7 @@ from luigi import six
 
 import luigi
 import luigi.contrib.s3 as luigi_s3
+import luigi.contrib.postgres
 import boto
 from heapq import nlargest
 
