@@ -8,7 +8,7 @@ wget https://raw.githubusercontent.com/spotify/luigi/master/examples/top_artists
 # add the environment names required
 cp .bashrc .bashrc.bkup.luigiexamples
 
-os.environ[name]
+
 
 
 
