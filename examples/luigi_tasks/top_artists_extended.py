@@ -130,7 +130,7 @@ class ArtistS3ToDatabase(luigi.contrib.postgres.CopyToTable):
     host = os.environ["LUIGI_DBHOST"]
     database = os.environ["LUIGI_DBDATABASE"]
     user = os.environ["LUIGI_DBUSER"]
-    password = os.environ["LUIGI_DBPASS"]
+    password = os.environ["LUIGI_DBPASSWORD"]
     table = "artist_streams"
 
     columns = [("date_from", "DATE"),
