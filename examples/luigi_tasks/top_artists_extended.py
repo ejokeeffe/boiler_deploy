@@ -128,7 +128,7 @@ class ArtistS3ToDatabase(luigi.contrib.postgres.CopyToTable):
     sleep_seconds = luigi.Parameter()
 
     host = os.environ["LUIGI_DBHOST"]
-    database = os.environ["LUIGI_DBDB"]
+    database = os.environ["LUIGI_DBDATABASE"]
     user = os.environ["LUIGI_DBUSER"]
     password = os.environ["LUIGI_DBPASS"]
     table = "artist_streams"
@@ -144,4 +144,4 @@ class ArtistS3ToDatabase(luigi.contrib.postgres.CopyToTable):
         * :py:class:`~.Top10Artists`
         :return: list of object (:py:class:`luigi.task.Task`)
         """
-        return Top10Artists(self.date_interval,self.sleep_seconds)
+        return Top10ArtistsS3(self.date_interval,self.sleep_seconds)
