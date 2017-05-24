@@ -94,7 +94,7 @@ class Top10ArtistsS3(luigi.Task):
     def output(self):
         s3_string="s3:{0}{1}".format(
             os.environ["LUIGIS3_EXAMPLES"],
-            "data/top_artists_{}.tsv".format(self.date_interval))
+            "top_artists_{}.tsv".format(self.date_interval))
         return luigi_s3.S3Target(s3_string)
 
     def run(self):
